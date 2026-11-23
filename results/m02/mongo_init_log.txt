@@ -1,0 +1,11 @@
+##### kubectl logs job/mongo-init -n emi
+mongo-0.mongo is up
+mongo-1.mongo is up
+mongo-2.mongo is up
+{
+  ok: 1
+}
+waiting for 1 PRIMARY + 2 SECONDARY ...
+mongo-0.mongo:27017  PRIMARY
+mongo-1.mongo:27017  SECONDARY
+mongo-2.mongo:27017  SECONDARY

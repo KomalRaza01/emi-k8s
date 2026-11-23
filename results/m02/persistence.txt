@@ -1,0 +1,35 @@
+################ BEFORE deleting mongo-1 ################
+--- pod mongo-1:
+NAME      READY   STATUS    RESTARTS   AGE   IP           NODE       NOMINATED NODE   READINESS GATES
+mongo-1   1/1     Running   0          11m   10.244.0.9   minikube   <none>           <none>
+--- pod UID : ed271c08-68f7-4096-b0f0-814af9cf5438
+--- PVCs:
+NAME           STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+data-mongo-0   Bound    pvc-faef2808-9748-4231-9e01-348dc0621797   1Gi        RWO            standard       <unset>                 11m
+data-mongo-1   Bound    pvc-cf0b3f01-be34-4642-b1ab-903ae56c5188   1Gi        RWO            standard       <unset>                 11m
+data-mongo-2   Bound    pvc-c399c99a-d361-460c-950d-a891d50217e9   1Gi        RWO            standard       <unset>                 11m
+--- PVC data-mongo-1 UID : cf0b3f01-be34-4642-b1ab-903ae56c5188
+--- documents in calculations (replica set): 7
+--- documents seen on mongo-1: 7
+
+################ DELETING mongo-1 ################
+pod "mongo-1" deleted from emi namespace
+pod/mongo-1 condition met
+
+################ AFTER (pod re-created by StatefulSet) ################
+--- pod mongo-1:
+NAME      READY   STATUS    RESTARTS   AGE   IP            NODE       NOMINATED NODE   READINESS GATES
+mongo-1   1/1     Running   0          28s   10.244.0.10   minikube   <none>           <none>
+--- pod UID : 844b90b9-4d53-46de-a4db-6cc563d10c94   (different = new pod)
+--- PVCs:
+NAME           STATUS   VOLUME                                     CAPACITY   ACCESS MODES   STORAGECLASS   VOLUMEATTRIBUTESCLASS   AGE
+data-mongo-0   Bound    pvc-faef2808-9748-4231-9e01-348dc0621797   1Gi        RWO            standard       <unset>                 12m
+data-mongo-1   Bound    pvc-cf0b3f01-be34-4642-b1ab-903ae56c5188   1Gi        RWO            standard       <unset>                 12m
+data-mongo-2   Bound    pvc-c399c99a-d361-460c-950d-a891d50217e9   1Gi        RWO            standard       <unset>                 12m
+--- PVC data-mongo-1 UID : cf0b3f01-be34-4642-b1ab-903ae56c5188   (same = same disk)
+--- documents in calculations (replica set): 7
+--- documents seen on mongo-1: 7
+--- replica set members:
+mongo-0.mongo:27017  PRIMARY
+mongo-1.mongo:27017  SECONDARY
+mongo-2.mongo:27017  SECONDARY
