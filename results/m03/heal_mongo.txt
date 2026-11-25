@@ -1,0 +1,45 @@
+################ BEFORE ################
+Current PRIMARY: mongo-0.mongo:27017
+mongo-0.mongo:27017  PRIMARY
+mongo-1.mongo:27017  SECONDARY
+mongo-2.mongo:27017  SECONDARY
+Documents before: 401
+
+################ DELETING PRIMARY POD: mongo-0 ################
+pod "mongo-0" deleted from emi namespace
+
+################ AFTER ################
+New PRIMARY: mongo-1.mongo:27017
+mongo-0.mongo:27017  SECONDARY
+mongo-1.mongo:27017  PRIMARY
+mongo-2.mongo:27017  SECONDARY
+Documents after (includes requests written during loop): 580
+
+### Request summary during/after election:
+Total requests: 178    Failed (non-200): 0
+
+### Timestamped pod watch (mongo pods):
+23:53:33 mongo-0                    1/1   Running     0     12m
+23:53:33 mongo-1                    1/1   Running     0     12m
+23:53:33 mongo-2                    1/1   Running     0     12m
+23:53:33 mongo-init-wrn8h           0/1   Completed   0     12m
+23:53:39 mongo-0                    1/1   Terminating   0     12m
+23:53:39 mongo-0                    1/1   Terminating   0     12m
+23:53:57 mongo-0                    0/1   Completed     0     13m
+23:53:58 mongo-0                    0/1   Completed     0     13m
+23:53:58 mongo-0                    0/1   Completed     0     13m
+23:53:58 mongo-0                    0/1   Pending       0     0s
+23:53:58 mongo-0                    0/1   Pending       0     0s
+23:53:59 mongo-0                    0/1   ContainerCreating   0     1s
+23:53:59 mongo-0                    0/1   Running             0     1s
+23:54:24 mongo-0                    1/1   Running             0     26s
+23:54:24 mongo-0                    1/1   Running             0     26s
+
+NAME                       READY   STATUS      RESTARTS   AGE
+emi-web-7d6b894576-m4rr2   1/1     Running     0          2m8s
+emi-web-7d6b894576-qknxz   1/1     Running     0          14m
+emi-web-7d6b894576-r675s   1/1     Running     0          14m
+mongo-0                    1/1     Running     0          63s
+mongo-1                    1/1     Running     0          14m
+mongo-2                    1/1     Running     0          14m
+mongo-init-wrn8h           0/1     Completed   0          14m

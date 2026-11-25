@@ -1,0 +1,6 @@
+### 30 requests via Ingress (3replicas)  -  Wed Nov 25 11:51:43 PM PKT 2026
+Requests  Pod
+     11 emi-web-7d6b894576-7v4sr
+     10 emi-web-7d6b894576-qknxz
+      9 emi-web-7d6b894576-r675s
+Total: 30   Failed: 0

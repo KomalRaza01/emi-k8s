@@ -1,0 +1,11 @@
+
+### Pod readiness vs. first request served
+(for pre-existing pods, Ready at reflects the start of the watch)
+POD | READY AT | FIRST REQUEST SERVED AT
+emi-web-7d6b894576-7v4sr | 23:51:43 | 23:51:44
+emi-web-7d6b894576-j28pq | 23:51:57 | 23:52:01
+emi-web-7d6b894576-ks5d4 | 23:51:57 | 23:52:00
+emi-web-7d6b894576-qknxz | 23:51:43 | 23:51:43
+emi-web-7d6b894576-r675s | 23:51:43 | 23:51:43
+
+Total requests: 83    Failed (non-200): 0
